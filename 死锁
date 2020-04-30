@@ -1,0 +1,27 @@
+#include <thread>
+#include <mutex>
+
+/** 互斥量
+*/
+static std::mutex s_mutex;
+
+void Fun1()
+{
+    s_mutex.lock();
+    // do something
+    s_mutex.unlock();
+}
+
+void Fun()
+{
+    s_mutex.lock();
+    Fun1();
+    s_mutex.unlock();
+}
+
+int main()
+{
+    Fun();
+    getchar();
+    return 1;
+}
